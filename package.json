@@ -1,0 +1,32 @@
+{
+	"name": "converz",
+	"version": "1.0.0",
+	"description": "Commenting system",
+	"main": "server/server.js",
+	"scripts": {
+		"start": "npm run dev",
+		"server": "nodemon server/server.js",
+		"client": "npm start --prefix client",
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"client-install": "cd client && npm install"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/csd713/Converz.git"
+	},
+	"author": "Chiranjeevi SD",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/csd713/Converz/issues"
+	},
+	"homepage": "https://github.com/csd713/Converz#readme",
+	"dependencies": {
+		"concurrently": "^3.5.1",
+		"dotenv": "^5.0.1",
+		"express": "^4.16.3",
+		"mongoose": "^5.0.14"
+	},
+	"devDependencies": {
+		"nodemon": "^1.17.3"
+	}
+}
