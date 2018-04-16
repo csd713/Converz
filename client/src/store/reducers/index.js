@@ -1,6 +1,6 @@
-import {combineReducers} from 'redux';
-import customerReducer from './customer';
+import { combineReducers } from 'redux';
+import commentReducer from './comment';
 
 export default combineReducers({
-  customers: customerReducer
-})
+	comments: commentReducer
+});
