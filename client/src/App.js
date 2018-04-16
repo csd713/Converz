@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Comments from './components/comments'
+import Comments from './components/CommentsPage';
 import logo from './logo.svg';
 import './App.css';
 

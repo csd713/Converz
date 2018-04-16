@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import AddComment from './AddComment';
 
 class Comments extends Component {
 	constructor() {
@@ -20,6 +21,7 @@ class Comments extends Component {
 		return (
 			<div>
 				<h2>Comments</h2>
+				<AddComment />
 				<ul>
 					{this.state.comments.map(comment =>
 						<li key={comment.id}>{comment.commentText} {comment.author} {comment.posted_date}</li>
