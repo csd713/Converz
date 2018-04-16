@@ -18,10 +18,10 @@ mongoose.connect(MONGODB_URL, () => {
 });
 
 app.get('/', function (req, res) {
-	res.send('go to /comment');
+	res.send('go to /api/comments');
 });
 
-app.use('/comment', commentsRoute);
+app.use('/api/comments', commentsRoute);
 
 app.listen(PORT, () => {
 	console.log('Listening on port ' + PORT);
