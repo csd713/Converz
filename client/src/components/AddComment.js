@@ -1,25 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import '../App.css';
+import { connect } from 'react-redux';
+import * as commentsActions from '../actions/commentsAction'
+
 
 class AddComment extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			comment: {commentText: "", author: "CSD", posted_date: null}
+			comment: { commentText: "", author: "CSD", posted_date: null }
 		};
 
-		this.onClickAddComment = this.onClickAddComment.bind(this);
+		this.onClickSaveComment = this.onClickSaveComment.bind(this);
 		this.onCommentChange = this.onCommentChange.bind(this);
 	}
 
-	onCommentChange(event){
+	onCommentChange(event) {
 		const comment = this.state.comment;
 		comment.commentText = event.target.value;
-		this.setState({comment: comment});
+		this.setState({ comment: comment });
 	}
 
-	onClickAddComment(){
-		alert(`Adding comment ${this.state.comment.commentText}`);
+	onClickSaveComment() {
+		//fire off an action using dispatch
+		this.props.dispatch(commentsActions.createComment(this.state.comment));
+	}
+
+	commentRow(comment, index) {
+		return <div key={index}>{comment.commentText}</div>
 	}
 
 	render() {
@@ -35,10 +43,24 @@ class AddComment extends Component {
 					type="submit"
 					onChange={this.onCommentChange}
 					value="Add Comment"
-					onClick={this.onClickAddComment} />
+					onClick={this.onClickSaveComment} />
+
+				{this.props.comments.map(this.commentRow)}
 			</div>
 		);
 	}
 }
 
-export default AddComment;
+AddComment.propTypes = {
+	dispatch: PropTypes.func.isRequired,
+	comments: PropTypes.array.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+	return {
+		comments: state.comments
+	}
+}
+
+const connectedStateAndProps = connect(mapStateToProps);
+export default connectedStateAndProps(AddComment);
