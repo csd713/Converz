@@ -14,7 +14,8 @@ export const saveComment = (data) => {
 			headers: {
 				"Content-Type": "application/json"
 			}
-		}).then(handleResponse);
+		}).then(handleResponse)
+			.then(comments => dispatch({ type: SAVE_COMMENT, payload: comments }))
 	};
 }
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CommentCard from './CommentCard';
 //import { getComments } from '../../store/actions/comments';
+
 
 function CommentsList({ comments }) {
 	const emptyMessage = (
@@ -8,7 +10,9 @@ function CommentsList({ comments }) {
 	);
 
 	const commentsList = (
-		<p>Comments List</p>
+		<div>
+			{comments.map(comment => <CommentCard comment={comment} key={comment._id} />)}
+		</div>
 	);
 
 	return (
@@ -20,7 +24,7 @@ function CommentsList({ comments }) {
 
 CommentsList.propTypes = {
 	comments: PropTypes.array.isRequired,
-//	getComments: PropTypes.func.isRequired
+	//	getComments: PropTypes.func.isRequired
 }
 
 export default CommentsList;
