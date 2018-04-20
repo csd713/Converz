@@ -2,12 +2,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
 const commentsRoute = require('./routes/comments-route');
 
 //Using dot env to laod environment variables
 dotenv.load();
 
 const app = express();
+app.use(bodyParser.json());
 
 //BOOKSTORE_MLAB_URL - MongoDb url from Mlab
 const MONGODB_URL = process.env.BOOKSTORE_MLAB_URL || 'mongodb://localhost/commentStore';
@@ -22,6 +24,14 @@ app.get('/', function (req, res) {
 });
 
 app.use('/api/comments', commentsRoute);
+
+app.use((req, res) => {
+	res.status(404).json({
+		errors: {
+			global: "Still working on it.. please try again later"
+		}
+	})
+})
 
 app.listen(PORT, () => {
 	console.log('Listening on port ' + PORT);
