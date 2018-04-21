@@ -4,7 +4,8 @@ import logo from './logo.svg';
 import './App.css';
 import store from './store';
 import Comments from './components/Comments/CommentsPage';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter, Link, Route } from 'react-router-dom';
+import CommentForm from './components/Comments/CommentForm';
 
 class App extends Component {
 
@@ -18,6 +19,7 @@ class App extends Component {
 								<img src={logo} className="App-logo" alt="logo" />
 								<h1 className="App-title">Converzation</h1></Link>
 						</header>
+						<Route path="/:_id" component={CommentForm} />
 						<Comments />
 					</div>
 				</Provider>

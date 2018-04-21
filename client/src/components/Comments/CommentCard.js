@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default function CommentCard({ comment }) {
 
 	return (
 		<div className="card">
-			<div class="card-body">
-				<p class="card-text">
+			<div className="card-body">
+				<p className="card-text">
 					{comment.commentText}<br />
 					{comment.author + " > " + comment.posted_date}
 				</p>
 			</div>
-			<div class="card-footer">
-
+			<div className="card-footer">
+				<div>
+					<Link to={`/${comment._id}`} className="btn btn-primary">Edit</Link>
+					<a className="btn btn-danger">Delete</a>
+				</div>
 			</div>
 		</div>
 	);

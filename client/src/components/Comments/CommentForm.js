@@ -5,7 +5,8 @@ import { saveComment } from '../../store/actions/comments';
 
 class CommentForm extends Component {
 	state = {
-		commentText: '',
+		_id: this.props.comment ? this.props.comment._id : null,
+		commentText: this.props.comment ? this.props.comment.commentText : '',
 		errors: {},
 		loading: false,
 		done: false
@@ -76,11 +77,19 @@ class CommentForm extends Component {
 	};
 };
 
-// const dispatchToProps = (dispatch) => ({
-// 	saveComment: () => dispatch(saveComment())
-// })
-
 // first argument is null
 // because we don't need to get any data from global app state
 //second arg is object of actions
-export default connect(null, { saveComment })(CommentForm);
+
+function mapStateToProps(state, props) {
+	if (props.params._id) {
+		return {
+			comment: state.comments.find(item => item._id === props.params._id)
+		};
+	}
+	return {
+		comment: null
+	}
+}
+
+export default connect(mapStateToProps, { saveComment })(CommentForm);
