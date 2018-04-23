@@ -23,7 +23,7 @@ function CommentsList({ comments }) {
 };
 
 CommentsList.propTypes = {
-	comments: PropTypes.array.isRequired,
+	comments: PropTypes.array.isRequired
 	//	getComments: PropTypes.func.isRequired
 }
 

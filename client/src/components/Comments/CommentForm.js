@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-import { saveComment } from '../../store/actions/comments';
+import { saveComment, getSingleComment } from '../../store/actions/comments';
 
 class CommentForm extends Component {
 	state = {
@@ -11,6 +11,17 @@ class CommentForm extends Component {
 		loading: false,
 		done: false
 	};
+	componentWillReceiveProps = (nextProps) => {
+		this.setState({
+			_id: nextProps._id,
+			commentText: nextProps.commentText
+		});
+	}
+	componentDidMount = () => {
+		if (this.props.match.params._id) {
+			this.props.getSingleComment(this.props.match.params._id);
+		}
+	}
 
 	handleChange = (evnt) => {
 		if (!!this.state.errors[evnt.target.name]) {
@@ -82,9 +93,9 @@ class CommentForm extends Component {
 //second arg is object of actions
 
 function mapStateToProps(state, props) {
-	if (props.params._id) {
+	if (props.match.params._id) {
 		return {
-			comment: state.comments.find(item => item._id === props.params._id)
+			comment: state.comments.find(item => item._id === props.match.params._id)
 		};
 	}
 	return {
@@ -92,4 +103,4 @@ function mapStateToProps(state, props) {
 	}
 }
 
-export default connect(mapStateToProps, { saveComment })(CommentForm);
+export default connect(mapStateToProps, { saveComment, getSingleComment })(CommentForm);
