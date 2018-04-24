@@ -14,7 +14,7 @@ export default function CommentCard({ comment }) {
 			</div>
 			<div className="card-footer">
 				<div>
-					<Link to={`/${comment._id}`} className="btn btn-primary">Edit</Link>
+					<Link to={`/edit/${comment._id}`} className="btn btn-primary">Edit</Link>
 					<a className="btn btn-danger">Delete</a>
 				</div>
 			</div>

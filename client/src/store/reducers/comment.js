@@ -1,4 +1,4 @@
-import { GET_COMMENTS, SAVE_COMMENT, GET_COMMENT } from '../actions/constants'
+import { GET_COMMENTS, SAVE_COMMENT, GET_COMMENT, UPDATE_COMMENT } from '../actions/constants'
 
 const commentReducer = (state = [], { type, payload }) => {
 	switch (type) {
@@ -19,6 +19,11 @@ const commentReducer = (state = [], { type, payload }) => {
 					payload
 				];
 			}
+		case UPDATE_COMMENT:
+			return state.map(item => {
+				if (item._id === payload._id) return payload;
+				return item;
+			});
 		case SAVE_COMMENT:
 			return [...state, payload]
 		default:

@@ -1,4 +1,4 @@
-import { GET_COMMENTS, GET_COMMENT, SAVE_COMMENT } from './constants';
+import { GET_COMMENTS, GET_COMMENT, SAVE_COMMENT, UPDATE_COMMENT } from './constants';
 
 export const getComments = () => dispatch => {
 	return fetch('/api/comments')
@@ -29,10 +29,23 @@ function handleResponse(response) {
 	}
 }
 
-export function getSingleComment(id){
+export function getSingleComment(id) {
 	return dispatch => {
 		fetch(`/api/comments/${id}`)
-		.then(res => res.json())
-		.then(comment => dispatch({ type: GET_COMMENT, payload: comment }))
+			.then(res => res.json())
+			.then(comment => dispatch({ type: GET_COMMENT, payload: comment }))
 	}
+}
+
+export const updateComment = (data) => {
+	return dispatch => {
+		return fetch(`/api/comments/${data._id}`, {
+			method: 'put',
+			body: JSON.stringify(data),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}).then(handleResponse)
+			.then(comment => dispatch({ type: UPDATE_COMMENT, payload: comment }))
+	};
 }

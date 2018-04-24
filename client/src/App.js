@@ -5,7 +5,7 @@ import './App.css';
 import store from './store';
 import Comments from './components/Comments/CommentsPage';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
-import CommentForm from './components/Comments/CommentForm';
+import CommentFormPage from './components/Comments/CommentFormPage';
 
 class App extends Component {
 
@@ -19,7 +19,7 @@ class App extends Component {
 								<img src={logo} className="App-logo" alt="logo" />
 								<h1 className="App-title">Converzation</h1></Link>
 						</header>
-						<Route path="/:_id" component={CommentForm} />
+						<Route path="/edit/:_id" component={CommentFormPage} />
 						<Comments />
 					</div>
 				</Provider>

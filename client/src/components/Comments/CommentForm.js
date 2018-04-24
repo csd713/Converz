@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { connect } from 'react-redux';
-import { saveComment, getSingleComment } from '../../store/actions/comments';
 
 class CommentForm extends Component {
 	state = {
@@ -16,11 +14,6 @@ class CommentForm extends Component {
 			_id: nextProps._id,
 			commentText: nextProps.commentText
 		});
-	}
-	componentDidMount = () => {
-		if (this.props.match.params._id) {
-			this.props.getSingleComment(this.props.match.params._id);
-		}
 	}
 
 	handleChange = (evnt) => {
@@ -49,12 +42,11 @@ class CommentForm extends Component {
 		const isValid = Object.keys(errors).length === 0;
 
 		if (isValid) {
-			const { commentText } = this.state;
+			const { _id, commentText } = this.state;
 			this.setState({ loading: true });
-			this.props.saveComment({ commentText }).then(
-				() => { this.setState({ done: true }) },
-				(err) => err.response.json().then(({ errors }) => this.setState({ errors, loading: false }))
-			);
+			this.props.saveComment({ _id, commentText })
+				.catch((err) => err.response.json().then(({ errors }) => this.setState({ errors, loading: false }))
+				);
 		}
 	};
 
@@ -88,19 +80,4 @@ class CommentForm extends Component {
 	};
 };
 
-// first argument is null
-// because we don't need to get any data from global app state
-//second arg is object of actions
-
-function mapStateToProps(state, props) {
-	if (props.match.params._id) {
-		return {
-			comment: state.comments.find(item => item._id === props.match.params._id)
-		};
-	}
-	return {
-		comment: null
-	}
-}
-
-export default connect(mapStateToProps, { saveComment, getSingleComment })(CommentForm);
+export default CommentForm;
