@@ -4,14 +4,17 @@ import CommentCard from './CommentCard';
 //import { getComments } from '../../store/actions/comments';
 
 
-function CommentsList({ comments }) {
+function CommentsList({ comments, deleteComment }) {
 	const emptyMessage = (
 		<p>No conversation to display</p>
 	);
 
 	const commentsList = (
 		<div>
-			{comments.map(comment => <CommentCard comment={comment} key={comment._id} />)}
+			{comments.map(comment => <CommentCard
+				comment={comment}
+				key={comment._id}
+				deleteComment={deleteComment} />)}
 		</div>
 	);
 
@@ -23,8 +26,8 @@ function CommentsList({ comments }) {
 };
 
 CommentsList.propTypes = {
-	comments: PropTypes.array.isRequired
-	//	getComments: PropTypes.func.isRequired
+	comments: PropTypes.array.isRequired,
+	deleteComment: PropTypes.func.isRequired
 }
 
 export default CommentsList;

@@ -1,6 +1,15 @@
-import { GET_COMMENTS, SAVE_COMMENT, GET_COMMENT, UPDATE_COMMENT } from '../actions/constants'
+import {
+	GET_COMMENTS,
+	SAVE_COMMENT,
+	GET_COMMENT,
+	UPDATE_COMMENT,
+	DELETE_COMMENT
+} from '../actions/constants'
 
-const commentReducer = (state = [], { type, payload }) => {
+const commentReducer = (state = [], {
+	type,
+	payload
+}) => {
 	switch (type) {
 		case GET_COMMENTS:
 			return payload;
@@ -26,6 +35,8 @@ const commentReducer = (state = [], { type, payload }) => {
 			});
 		case SAVE_COMMENT:
 			return [...state, payload]
+		case DELETE_COMMENT:
+			return state.filter(item => item._id !== payload)
 		default:
 			return state;
 	}

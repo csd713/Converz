@@ -1,4 +1,4 @@
-import { GET_COMMENTS, GET_COMMENT, SAVE_COMMENT, UPDATE_COMMENT } from './constants';
+import { GET_COMMENTS, GET_COMMENT, SAVE_COMMENT, UPDATE_COMMENT, DELETE_COMMENT } from './constants';
 
 export const getComments = () => dispatch => {
 	return fetch('/api/comments')
@@ -46,6 +46,18 @@ export const updateComment = (data) => {
 				"Content-Type": "application/json"
 			}
 		}).then(handleResponse)
-			.then(comment => dispatch({ type: UPDATE_COMMENT, payload: comment }))
+			.then(id => dispatch({ type: UPDATE_COMMENT, payload: id }))
+	};
+}
+
+export const deleteComment = (id) => {
+	return dispatch => {
+		return fetch(`/api/comments/${id}`, {
+			method: 'delete',
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}).then(handleResponse)
+			.then(comment => dispatch({ type: DELETE_COMMENT, payload: comment }))
 	};
 }

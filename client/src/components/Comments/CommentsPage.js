@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import { getComments } from '../../store/actions/comments';
+import { getComments, deleteComment } from '../../store/actions/comments';
 import './comments.css';
 import CommentsList from './CommentsList';
-import CommentForm from './CommentForm'
+import CommentFormPage from './CommentFormPage'
 
 class CommentsPage extends Component {
 
@@ -16,16 +16,18 @@ class CommentsPage extends Component {
 		return (
 			<div>
 				<h2>Add new Comment</h2>
-				<CommentForm />
+				<CommentFormPage />
 				<h3>Comments List</h3>
-				<CommentsList comments={this.props.comments} />
+				<CommentsList comments={this.props.comments} deleteComment={deleteComment}/>
 			</div>
 		);
 	}
 }
 
 CommentsPage.propTypes = {
-	comments: PropTypes.array.isRequired
+	comments: PropTypes.array.isRequired,
+	getComments: PropTypes.func.isRequired,
+	deleteComment: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -34,8 +36,8 @@ const mapStateToProps = (state) => {
 	};
 }
 
-const dispatchToProps = (dispatch) => ({
-	getComments: () => dispatch(getComments())
-})
+// const dispatchToProps = (dispatch) => ({
+// 	getComments: () => dispatch(getComments())
+// })
 
-export default connect(mapStateToProps, dispatchToProps)(CommentsPage);
+export default connect(mapStateToProps, { getComments, deleteComment })(CommentsPage);

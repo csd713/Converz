@@ -2,14 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { saveComment, getSingleComment, updateComment } from '../../store/actions/comments';
 import CommentForm from './CommentForm';
+import { Redirect } from 'react-router-dom';
 
 class CommentFormPage extends React.Component {
 	state = {
 		redirect: false
 	}
 	componentDidMount = () => {
-		if (this.props.match.params._id) {
-			this.props.getSingleComment(this.props.match.params._id);
+		const {match} = this.props;
+		if (match.params._id) {
+			this.props.getSingleComment(match.params._id);
 		}
 	}
 
@@ -40,9 +42,10 @@ class CommentFormPage extends React.Component {
 //second arg is object of actions
 
 function mapStateToProps(state, props) {
-	if (props.match.params._id) {
+	const {match} = props;
+	if (match.params._id) {
 		return {
-			comment: state.comments.find(item => item._id === props.match.params._id)
+			comment: state.comments.find(item => item._id === match.params._id)
 		};
 	}
 	return {

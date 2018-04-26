@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function CommentCard({ comment }) {
+export default function CommentCard({ comment, deleteComment }) {
 
 	return (
 		<div className="card">
@@ -15,7 +15,7 @@ export default function CommentCard({ comment }) {
 			<div className="card-footer">
 				<div>
 					<Link to={`/edit/${comment._id}`} className="btn btn-primary">Edit</Link>
-					<a className="btn btn-danger">Delete</a>
+					<button className="btn btn-danger" onClick={()=> deleteComment(comment._id)}>Delete</button>
 				</div>
 			</div>
 		</div>
@@ -23,5 +23,6 @@ export default function CommentCard({ comment }) {
 }
 
 CommentCard.propTypes = {
-	comment: PropTypes.object.isRequired
+	comment: PropTypes.object.isRequired,
+	deleteComment: PropTypes.func.isRequired
 }
