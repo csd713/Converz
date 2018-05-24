@@ -15,8 +15,7 @@ const commentSchema = new Schema({
 		default: "CSD"
 	},
 	posted_date: {
-		type: Date,
-		default: Date.now
+		type: Date
 	}
 });
 
@@ -36,6 +35,7 @@ module.exports.getCommentById = function (id, callback) {
 
 //Function to add a comment
 module.exports.addComment = function (comment, callback) {
+	comment.posted_date = new Date();
 	Comment.create(comment, callback);
 }
 
@@ -44,6 +44,7 @@ module.exports.updateComment = function (id, comment, options, callback) {
 	var query = {
 		_id: id
 	};
+	comment.posted_date = new Date();
 	var update = {
 		text: comment.text,
 		author: comment.author,

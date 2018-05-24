@@ -16,8 +16,8 @@ commentsApp.controller('CommentsController', ['$scope', '$http', '$location', '$
 	}
 
 	$scope.addComment = function () {
-		$http.post('/api/comment/', $scope.book).success(function () {
-			window.location.href = '#/comment';
+		$http.post('/api/comment/', $scope.comment).success(function () {
+			window.location.href = '/';
 		});
 	}
 

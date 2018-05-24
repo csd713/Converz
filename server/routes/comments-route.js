@@ -25,19 +25,24 @@ router.get('/:_id', function (req, res) {
 	});
 });
 
+// validate incoming data
+function validateData(data) {
+
+	let errors = {};
+	if (data.text === '') errors.title = "Ohh! Comment can't be empty!!";
+	const isValid = Object.keys(errors).length === 0;
+	return { errors, isValid };
+}
+
 //To add a new comment to the database
 router.post('/', function (req, res) {
 	var comment = req.body;
-	if (isValid) {
-		Comment.addComment(comment, function (err, comment) {
-			if (err) {
-				throw err;
-			}
-			res.json(comment);
-		});
-	} else {
-		res.status(400).json({ errors });
-	}
+	Comment.addComment(comment, function (err, comment) {
+		if (err) {
+			throw err;
+		}
+		res.json(comment);
+	});
 });
 
 //To update a comment details by its id

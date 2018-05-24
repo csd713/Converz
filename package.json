@@ -4,8 +4,7 @@
 	"description": "Commenting system",
 	"main": "server/server.js",
 	"scripts": {
-		"start": "npm run server",
-		"server": "nodemon server/server.js"
+		"start": "nodemon server/server.js"
 	},
 	"repository": {
 		"type": "git",

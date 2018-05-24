@@ -1,10 +1,20 @@
 <div ng-init="getComments()">
-	<h3 class="panel-title">Latest Comments</h3>
+	<div>
+		<h3 class="text-center">Latest Comments</h3>
+	</div>
+	<div>
+		<form ng-submit="addComment()">
+			<div class="form-group">
+				<input type="text" class="form-control" id="text" placeholder="Comment here..." ng-model="comment.text">
+			</div>
+			<button type="submit" class="btn btn-primary">Comment</button>
+		</form>
+	</div>
 	<div ng-repeat="comment in comments">
 		<div class="card bg-light text-dark">
 			<div class="card-body">
 				<h4>{{comment.text}}</h4>
-				<p>{{comment.author}}</p>
+				<small class="form-text text-muted">{{comment.author}} | {{comment.posted_date}}</small>
 			</div>
 		</div>
 	</div>
