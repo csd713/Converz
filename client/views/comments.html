@@ -1,0 +1,11 @@
+<div ng-init="getComments()">
+	<h3 class="panel-title">Latest Comments</h3>
+	<div ng-repeat="comment in comments">
+		<div class="card bg-light text-dark">
+			<div class="card-body">
+				<h4>{{comment.text}}</h4>
+				<p>{{comment.author}}</p>
+			</div>
+		</div>
+	</div>
+</div>

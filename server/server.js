@@ -10,9 +10,11 @@ dotenv.load();
 
 const app = express();
 app.use(bodyParser.json());
+//location for static content
+app.use(express.static(__dirname + '/../client'));
 
-//BOOKSTORE_MLAB_URL - MongoDb url from Mlab
-const MONGODB_URL = process.env.BOOKSTORE_MLAB_URL || 'mongodb://localhost/commentStore';
+//COMMENTSTORE_MLAB_URL - MongoDb url from Mlab
+const MONGODB_URL = process.env.COMMENTSTORE_MLAB_URL || 'mongodb://localhost/commentstore';
 const PORT = process.env.PORT || 5050;
 
 mongoose.connect(MONGODB_URL, () => {
@@ -23,7 +25,7 @@ app.get('/', function (req, res) {
 	res.send('go to /api/comments');
 });
 
-app.use('/api/comments', commentsRoute);
+app.use('/api/comment', commentsRoute);
 
 app.use((req, res) => {
 	res.status(404).json({

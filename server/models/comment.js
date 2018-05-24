@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 //Comment schema
 
 const commentSchema = new Schema({
-	commentText: {
+	text: {
 		type: String,
 		required: true
 	},
@@ -21,8 +21,8 @@ const commentSchema = new Schema({
 });
 
 //this object can be accessed outside
- const Comment = mongoose.model('Comment', commentSchema);
- module.exports = Comment;
+const Comment = mongoose.model('Comment', commentSchema);
+module.exports = Comment;
 
 //Function to get commentSchema
 module.exports.getComments = function (callback, limit) {
@@ -45,7 +45,7 @@ module.exports.updateComment = function (id, comment, options, callback) {
 		_id: id
 	};
 	var update = {
-		commentText: comment.commentText,
+		text: comment.text,
 		author: comment.author,
 		posted_date: comment.posted_date
 	}

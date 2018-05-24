@@ -25,21 +25,10 @@ router.get('/:_id', function (req, res) {
 	});
 });
 
-// validate incoming data
-function validateData(data) {
-
-	let errors = {};
-	if (data.commentText === '') errors.title = "Ohh! Comment can't be empty!!";
-	const isValid = Object.keys(errors).length === 0;
-	return { errors, isValid };
-}
-
 //To add a new comment to the database
 router.post('/', function (req, res) {
 	var comment = req.body;
-	const { errors, isValid } = validateData(comment);
 	if (isValid) {
-		console.log(comment);
 		Comment.addComment(comment, function (err, comment) {
 			if (err) {
 				throw err;
