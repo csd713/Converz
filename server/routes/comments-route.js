@@ -12,6 +12,32 @@ router.get('/', function (req, res) {
 		}
 		res.json(comments);
 	});
+});
+
+// To get all the comments from the database
+router.get('/page/:page_no', function (req, res) {
+	let page = {};
+	page.number = parseInt(req.params.page_no);
+
+	// keep the size of the page to 10 comments per page by default
+	page.size = 10;
+
+	if (page.number < 0 || page.number === 0) {
+		return res.json({
+			message: "Error",
+			error: "Invalid page number. Try positive page number!"
+		});
+	}
+
+	Comment.getCommentsByPage(page, function (err, comments) {
+		if (err) {
+			return res.json({
+				message: "Error en aplicacion",
+				error: err
+			});
+		}
+		res.json(comments);
+	});
 
 });
 
@@ -25,7 +51,7 @@ router.get('/:_id', function (req, res) {
 	});
 });
 
-// validate incoming data
+// validate incoming data - TODO
 function validateData(data) {
 
 	let errors = {};

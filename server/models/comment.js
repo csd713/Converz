@@ -23,7 +23,7 @@ const commentSchema = new Schema({
 const Comment = mongoose.model('Comment', commentSchema);
 module.exports = Comment;
 
-//Function to get commentSchema
+//Function to get comments
 module.exports.getComments = function (callback, limit) {
 	Comment.find(callback).limit(limit);
 }
@@ -59,4 +59,30 @@ module.exports.deleteComment = function (id, callback) {
 		_id: id
 	};
 	Comment.remove(query, callback);
+}
+
+//Function to get comments by page
+module.exports.getCommentsByPage = function (page, callback) {
+	let query = {};
+	query.skip = page.size * (page.number - 1);
+	query.limit = page.size;
+
+	// count function is async - so find after getting the count
+	Comment.count({}, function (err, count) {
+		if (err) {
+			return callback('Error in DB - No documents', null);
+		}
+
+		let totalPages = Math.ceil(count / page.size);
+
+		if (page.number > totalPages) {
+			return callback(`Invalid page number. Try a page number between 1 - ${totalPages}.`, null);
+		}
+
+		Comment.find({}, {}, query, callback);
+	})
+}
+
+module.exports.getCount = function (callback) {
+	Comment.count({}, callback);
 }
