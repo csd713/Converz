@@ -82,7 +82,3 @@ module.exports.getCommentsByPage = function (page, callback) {
 		Comment.find({}, {}, query, callback);
 	})
 }
-
-module.exports.getCount = function (callback) {
-	Comment.count({}, callback);
-}

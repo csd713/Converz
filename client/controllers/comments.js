@@ -8,6 +8,13 @@ commentsApp.controller('CommentsController', ['$scope', '$http', '$location', '$
 		});
 	}
 
+	$scope.getCommentsByPage = function (page_no) {
+		// let page_no = $scope.page_no;
+		$http.get('/api/comment/page/' + page_no).success(function (response) {
+			$scope.comments = response;
+		});
+	}
+
 	$scope.getComment = function () {
 		var id = $routeParams.id;
 		$http.get('/api/comment/' + id).success(function (response) {

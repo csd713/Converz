@@ -1,4 +1,4 @@
-<div ng-init="getComments()">
+<div ng-init="getCommentsByPage(1)">
 	<div>
 		<h3 class="text-center">Latest Comments</h3>
 	</div>
@@ -17,5 +17,10 @@
 				<small class="form-text text-muted">{{comment.author}} | {{comment.posted_date}}</small>
 			</div>
 		</div>
+	</div>
+	<div>
+		<form ng-submit="getCommentsByPage(2)">
+			<button type="submit" class="btn-primary">Next Page</button>
+		</form>
 	</div>
 </div>
