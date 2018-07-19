@@ -36,7 +36,7 @@ commentsApp.controller('CommentsController', ['$scope', '$http', '$location', '$
 	}
 
 	$scope.deleteComment = function (id) {
-		$http.delete('/api/comment' + id).then(function () {
+		$http.delete('/api/comment/' + id).then(function () {
 			window.location.href = '#/comment';
 		});
 	}

@@ -67,6 +67,9 @@ module.exports.getCommentsByPage = function (page, callback) {
 	query.skip = page.size * (page.number - 1);
 	query.limit = page.size;
 
+	//reverse sort
+	query.sort = { 'posted_date': -1 };
+
 	// count function is async - so find after getting the count
 	Comment.count({}, function (err, count) {
 		if (err) {

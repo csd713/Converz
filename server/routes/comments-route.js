@@ -1,6 +1,7 @@
 'use strict';
 const router = require('express').Router();
 const Comment = require('../models/comment');
+const Time = require('../utils/getRelativeTime');
 
 //////////////////// Comment API ////////////////////////
 
@@ -36,7 +37,19 @@ router.get('/page/:page_no', function (req, res) {
 				error: err
 			});
 		}
-		res.json(comments);
+
+		let tempComments = [];
+		comments.forEach(element => {
+			// console.log(element.posted_date);
+			let obj = {};
+			obj._id = element._id;
+			obj.text = element.text;
+			obj.author = element.author;
+			obj.posted_date = Time.getRelativeTime(element.posted_date);
+			tempComments.push(obj);
+		});
+
+		res.json(tempComments);
 	});
 
 });

@@ -1,6 +1,12 @@
 <div ng-init="getCommentsByPage(1)">
 	<div>
-		<h3 class="text-center">Latest Comments</h3>
+		<div class="container">
+			<div class="jumbotron mt-3">
+				<a href="#/" ng-click="getCommentsByPage(1)">
+					<h2>Latest Comments</h2>
+				</a>
+			</div>
+		</div>
 	</div>
 	<div>
 		<form ng-submit="addComment()">
@@ -13,14 +19,20 @@
 	<div ng-repeat="comment in comments">
 		<div class="card bg-light text-dark">
 			<div class="card-body">
-				<h4>{{comment.text}}</h4>
-				<small class="form-text text-muted">{{comment.author}} | {{comment.posted_date}}</small>
+				<p>{{comment.text}}</p>
+				<small class="form-text text-muted">{{comment.author}} | {{comment.posted_date}} |
+					<a href="#/" ng-click="deleteComment(comment._id)">DELETE</a>
+				</small>
 			</div>
 		</div>
 	</div>
 	<div>
-		<form ng-submit="getCommentsByPage(2)">
-			<button type="submit" class="btn-primary">Next Page</button>
-		</form>
+		<div class="jumbotron mt-3">
+			<a ng-click="getCommentsByPage(1)">1</a> |
+			<a ng-click="getCommentsByPage(2)">2</a> |
+			<a ng-click="getCommentsByPage(3)">3</a> |
+			<a ng-click="getCommentsByPage(4)">4</a> |
+			<a ng-click="getCommentsByPage(5)">5</a>
+		</div>
 	</div>
 </div>
